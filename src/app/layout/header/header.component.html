@@ -1,0 +1,42 @@
+<header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+  <nav class="container mx-auto px-4 py-8 flex items-center justify-between">
+    <div class="flex items-center gap-12">
+      <!-- STAR WARS Logo -->
+      <div class="flex flex-col">
+        <a routerLink="/" routerLinkActive="underline" class="text-blue-900 font-medium hover:opacity-80 transition">
+          <span class="text-2xl font-bold text-blue-900 leading-tight">STAR</span>
+          <span class="text-2xl font-bold text-blue-900 leading-tight">WARS</span>
+        </a>
+      </div>
+
+      <!-- Navigation -->
+      <div class="flex items-center gap-8">
+        <a routerLink="/" routerLinkActive="underline" [routerLinkActiveOptions]="{ exact: true }"
+          class="text-blue-900 font-medium hover:opacity-80 transition">
+          Star Wars
+        </a>
+        <a routerLink="/films" routerLinkActive="underline"
+          class="text-blue-900 font-medium hover:opacity-80 transition">
+          Filme
+        </a>
+        <a routerLink="/characters" routerLinkActive="underline"
+          class="text-blue-900 font-medium hover:opacity-80 transition">
+          Charaktere
+        </a>
+        <a routerLink="/planets" routerLinkActive="underline"
+          class="text-blue-900 font-medium hover:opacity-80 transition">
+          Planeten
+        </a>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="flex items-center border border-gray-300 rounded px-3 py-2 w-64">
+      <input type="text" placeholder="Suche" class="flex-1 outline-none text-gray-700 placeholder-gray-400" />
+      <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+      </svg>
+    </div>
+  </nav>
+</header>
