@@ -24,7 +24,6 @@ export class CharactersComponent {
   people = signal<People[]>([]);
   nextPage = signal<string | null>(null);
   previousPage = signal<string | null>(null);
-  loading = signal(false);
   error = signal<string | null>(null);
 
   navigateToDetail(character: People) {
@@ -41,7 +40,6 @@ export class CharactersComponent {
   }
 
   loadPeople(url?: string) {
-    this.loading.set(true);
     // Handle both first load and pagination
     const apiCall: Observable<ApiResponse<People>> = url
       ? this.swapiService.getPeopleByUrl(url)
@@ -53,13 +51,10 @@ export class CharactersComponent {
         // Save the next/prev URLs for pagination buttons
         this.nextPage.set(response.next);
         this.previousPage.set(response.previous);
+        this.error.set(null);
       },
       error: (error: Error) => {
         this.error.set(error.message);
-        this.loading.set(false);
-      },
-      complete: () => {
-        this.loading.set(false);
       }
     });
   }
