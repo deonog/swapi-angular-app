@@ -1,0 +1,10 @@
+<div class="flex justify-between items-center mt-8">
+  <button [disabled]="!hasPrevious()" (click)="onPreviousClick()"
+    class="px-4 py-2 bg-blue-600 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed">
+    Previous
+  </button>
+  <button [disabled]="!hasNext()" (click)="onNextClick()"
+    class="px-4 py-2 bg-blue-600 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed">
+    Next
+  </button>
+</div>
