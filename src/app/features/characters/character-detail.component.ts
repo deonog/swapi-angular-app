@@ -32,7 +32,7 @@ export class CharacterDetailComponent implements OnInit {
   films = signal<Film[]>([]);
   starships = signal<Starship[]>([]);
   vehicles = signal<Vehicle[]>([]);
-  loading = signal(false);
+  error = signal<string | null>(null);
 
   ngOnInit() {
     if (!this.character()) {
@@ -46,8 +46,6 @@ export class CharacterDetailComponent implements OnInit {
   loadRelatedResources() {
     const characterData = this.character();
     if (!characterData) return;
-
-    this.loading.set(true);
 
     const films$ = characterData.films.length > 0
       ? forkJoin(
@@ -88,10 +86,10 @@ export class CharacterDetailComponent implements OnInit {
         this.films.set(results.films);
         this.starships.set(results.starships);
         this.vehicles.set(results.vehicles);
-        this.loading.set(false);
+        this.error.set(null);
       },
-      error: () => {
-        this.loading.set(false);
+      error: (error: Error) => {
+        this.error.set('Failed to load related resources. Please try again later.');
       }
     });
   }

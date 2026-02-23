@@ -32,7 +32,7 @@ export class FilmDetailComponent implements OnInit {
   planets = signal<Planet[]>([]);
   starships = signal<Starship[]>([]);
   vehicles = signal<Vehicle[]>([]);
-  loading = signal(false);
+  error = signal<string | null>(null);
 
   ngOnInit() {
     if (!this.film()) {
@@ -46,8 +46,6 @@ export class FilmDetailComponent implements OnInit {
   loadRelatedResources() {
     const filmData = this.film();
     if (!filmData) return;
-
-    this.loading.set(true);
 
     // SWAPI only gives us URLs, gotta fetch each one separately
     // Using forkJoin with object for better type safety
@@ -102,10 +100,10 @@ export class FilmDetailComponent implements OnInit {
         this.planets.set(results.planets);
         this.starships.set(results.starships);
         this.vehicles.set(results.vehicles);
-        this.loading.set(false);
+        this.error.set(null);
       },
-      error: () => {
-        this.loading.set(false);
+      error: (error: Error) => {
+        this.error.set('Failed to load related resources. Please try again later.');
       }
     });
   }

@@ -29,7 +29,7 @@ export class PlanetDetailComponent implements OnInit {
 
   residents = signal<People[]>([]);
   films = signal<Film[]>([]);
-  loading = signal(false);
+  error = signal<string | null>(null);
 
   ngOnInit() {
     if (!this.planet()) {
@@ -43,8 +43,6 @@ export class PlanetDetailComponent implements OnInit {
   loadRelatedResources() {
     const planetData = this.planet();
     if (!planetData) return;
-
-    this.loading.set(true);
 
     const residents$ = planetData.residents.length > 0
       ? forkJoin(
@@ -73,10 +71,10 @@ export class PlanetDetailComponent implements OnInit {
       next: (results) => {
         this.residents.set(results.residents);
         this.films.set(results.films);
-        this.loading.set(false);
+        this.error.set(null);
       },
-      error: () => {
-        this.loading.set(false);
+      error: (error: Error) => {
+        this.error.set('Failed to load related resources. Please try again later.');
       }
     });
   }
