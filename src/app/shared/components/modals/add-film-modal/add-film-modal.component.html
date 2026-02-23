@@ -1,0 +1,47 @@
+<dialog #dialog class="rounded-lg p-6 max-w-md w-full">
+  <div class="flex flex-col gap-4">
+    <h2 class="text-2xl font-bold text-black text-center">Add Film</h2>
+
+    <form [formGroup]="filmForm" class="flex flex-col gap-4">
+      <div class="flex flex-col gap-2">
+        <label class="text-black font-medium">Title</label>
+        <input type="text" formControlName="title" placeholder="Title"
+          class="border border-gray-300 rounded px-3 py-2 text-black" />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label class="text-black font-medium">Director</label>
+        <input type="text" formControlName="director" placeholder="Director"
+          class="border border-gray-300 rounded px-3 py-2 text-black" />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label class="text-black font-medium">Producer</label>
+        <select formControlName="producer" class="border border-gray-300 rounded px-3 py-2 text-black">
+          <option value="">Select producer</option>
+          <option value="george-lucas">George Lucas</option>
+        </select>
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label class="text-black font-medium">Release Date</label>
+        <input type="date" formControlName="releaseDate" class="border border-gray-300 rounded px-3 py-2 text-black" />
+      </div>
+
+      <div class="flex flex-col gap-2">
+        <label class="text-black font-medium">Description</label>
+        <textarea formControlName="description" rows="4" placeholder="Description"
+          class="border border-gray-300 rounded px-3 py-2 text-black"></textarea>
+      </div>
+
+      <div class="flex gap-2 justify-end mt-4">
+        <button type="button" (click)="onCancel()" class="px-4 py-2 bg-gray-200 text-black hover:bg-gray-300">
+          Cancel
+        </button>
+        <button type="button" (click)="onCancel()" class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700">
+          Add Film
+        </button>
+      </div>
+    </form>
+  </div>
+</dialog>
