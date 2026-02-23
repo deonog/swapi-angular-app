@@ -1,0 +1,31 @@
+<div class="container mx-auto px-4 py-8 text-black">
+  <div class="flex flex-col items-center">
+    <p class="text-black">Character Details</p>
+    <hr class="w-1/2 max-w-2xl border-t-2 border-gray-300 my-4">
+    <h1 class="text-2xl font-bold text-center text-black">{{ character()?.name }}</h1>
+  </div>
+
+  @if (character(); as charData) {
+  <div class="mt-8">
+    <h2 class="text-xl font-semibold mb-4 text-black">Details:</h2>
+    <div class="space-y-2">
+      <div>
+        <span class="font-medium text-black">Height:</span>
+        <span class="ml-2 text-black">{{ charData.height }} cm</span>
+      </div>
+      <div>
+        <span class="font-medium text-black">Mass:</span>
+        <span class="ml-2 text-black">{{ charData.mass }} kg</span>
+      </div>
+      <div>
+        <span class="font-medium text-black">Gender:</span>
+        <span class="ml-2 text-black">{{ charData.gender }}</span>
+      </div>
+      <div>
+        <span class="font-medium text-black">Birth Year:</span>
+        <span class="ml-2 text-black">{{ charData.birth_year }}</span>
+      </div>
+    </div>
+  </div>
+  }
+</div>

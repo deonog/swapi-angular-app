@@ -1,0 +1,31 @@
+<div class="container mx-auto px-4 py-8 text-black">
+  <div class="flex flex-col items-center">
+    <p class="text-black">Planet Details</p>
+    <hr class="w-1/2 max-w-2xl border-t-2 border-gray-300 my-4">
+    <h1 class="text-2xl font-bold text-center text-black">{{ planet()?.name }}</h1>
+  </div>
+
+  @if (planet(); as planetData) {
+  <div class="mt-8">
+    <h2 class="text-xl font-semibold mb-4 text-black">Details:</h2>
+    <div class="space-y-2">
+      <div>
+        <span class="font-medium text-black">Climate:</span>
+        <span class="ml-2 text-black">{{ planetData.climate }}</span>
+      </div>
+      <div>
+        <span class="font-medium text-black">Terrain:</span>
+        <span class="ml-2 text-black">{{ planetData.terrain }}</span>
+      </div>
+      <div>
+        <span class="font-medium text-black">Population:</span>
+        <span class="ml-2 text-black">{{ planetData.population }}</span>
+      </div>
+      <div>
+        <span class="font-medium text-black">Diameter:</span>
+        <span class="ml-2 text-black">{{ planetData.diameter }} km</span>
+      </div>
+    </div>
+  </div>
+  }
+</div>
