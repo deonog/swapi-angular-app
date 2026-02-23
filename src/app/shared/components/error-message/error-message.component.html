@@ -1,0 +1,14 @@
+<!-- Screen reader live region for error announcements -->
+<div aria-live="polite" aria-atomic="true" class="sr-only">
+  @if (error()) {
+  <span>Error: {{ error() }}</span>
+  }
+</div>
+
+<!-- Visible error message -->
+@if (error()) {
+<div [class]="containerClass()" class="p-4 bg-red-100 border border-red-400 text-red-700" role="alert">
+  <p class="font-semibold">Error</p>
+  <p>{{ error() }}</p>
+</div>
+}
