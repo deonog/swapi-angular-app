@@ -16,23 +16,26 @@
   <div class="mt-6 space-y-4">
     <div>
       <app-resource-chips [title]="'Characters'" [items]="getCharacterItems()" [clickable]="true"
-        (itemClick)="onCharacterClick($event)" (addClick)="onAddClick('character')" />
+        [showAddButton]="true" (itemClick)="onCharacterClick($event)" (addClick)="onAddClick('character')" />
     </div>
 
     <div>
       <app-resource-chips [title]="'Planets'" [items]="getPlanetItems()" [clickable]="true"
-        (itemClick)="onPlanetClick($event)" (addClick)="onAddClick('planet')" />
+        [showAddButton]="true" (itemClick)="onPlanetClick($event)" (addClick)="onAddClick('planet')" />
     </div>
 
     <div>
       <app-resource-chips [title]="'Starships'" [items]="getStarshipItems()" [clickable]="false"
-        (addClick)="onAddClick('starship')" />
+        [showAddButton]="true" (addClick)="onAddClick('starship')" />
     </div>
 
     <div>
       <app-resource-chips [title]="'Vehicles'" [items]="getVehicleItems()" [clickable]="false"
-        (addClick)="onAddClick('vehicle')" />
+        [showAddButton]="true" (addClick)="onAddClick('vehicle')" />
     </div>
   </div>
   }
+
+  <app-add-character-modal (submit)="onAddClick('character')" />
+  <app-add-planet-modal (submit)="onAddClick('planet')" />
 </div>

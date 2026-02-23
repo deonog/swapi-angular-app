@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, viewChild } from '@angular/core';
 import { CommonModule, formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { NavigationStateService } from '../../core/services/navigation-state.service';
@@ -13,11 +13,13 @@ import { ResourceChipsComponent, ResourceItem } from '../../shared/components/re
 import { DetailHeaderComponent } from '../../shared/components/detail-header/detail-header.component';
 import { DetailLayoutComponent } from '../../shared/components/detail-layout/detail-layout.component';
 import { getPlanetFields } from '../../core/utils/planet.util';
+import { AddCharacterModalComponent } from '../../shared/components/modals/add-character-modal/add-character-modal.component';
+import { AddFilmModalComponent } from '../../shared/components/modals/add-film-modal/add-film-modal.component';
 
 @Component({
   selector: 'app-planet-detail',
   standalone: true,
-  imports: [CommonModule, ResourceChipsComponent, DetailHeaderComponent, DetailLayoutComponent],
+  imports: [CommonModule, ResourceChipsComponent, DetailHeaderComponent, DetailLayoutComponent, AddCharacterModalComponent, AddFilmModalComponent],
   templateUrl: './planet-detail.component.html',
 })
 export class PlanetDetailComponent implements OnInit {
@@ -30,6 +32,9 @@ export class PlanetDetailComponent implements OnInit {
   residents = signal<People[]>([]);
   films = signal<Film[]>([]);
   error = signal<string | null>(null);
+
+  addCharacterModal = viewChild(AddCharacterModalComponent);
+  addFilmModal = viewChild(AddFilmModalComponent);
 
   ngOnInit() {
     if (!this.planet()) {
@@ -95,8 +100,13 @@ export class PlanetDetailComponent implements OnInit {
     }
   }
 
+  // Opens the modal for adding new resources when user clicks the add button
   onAddClick(resourceType: string) {
-    console.log(`Add ${resourceType} clicked`);
+    if (resourceType === 'resident') {
+      this.addCharacterModal()?.open();
+    } else if (resourceType === 'film') {
+      this.addFilmModal()?.open();
+    }
   }
 
   private toResourceItems<T extends { name: string; url: string }>(items: T[]): ResourceItem[] {

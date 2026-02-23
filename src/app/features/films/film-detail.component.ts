@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit } from '@angular/core';
+import { Component, inject, signal, OnInit, viewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { forkJoin, of } from 'rxjs';
@@ -14,11 +14,13 @@ import { DetailHeaderComponent } from '../../shared/components/detail-header/det
 import { DetailLayoutComponent } from '../../shared/components/detail-layout/detail-layout.component';
 import { DetailField } from '../../shared/components/detail-content/detail-content.component';
 import { getFilmFields } from '../../core/utils/film.util';
+import { AddCharacterModalComponent } from '../../shared/components/modals/add-character-modal/add-character-modal.component';
+import { AddPlanetModalComponent } from '../../shared/components/modals/add-planet-modal/add-planet-modal.component';
 
 @Component({
   selector: 'app-film-detail',
   standalone: true,
-  imports: [CommonModule, ResourceChipsComponent, DetailHeaderComponent, DetailLayoutComponent],
+  imports: [CommonModule, ResourceChipsComponent, DetailHeaderComponent, DetailLayoutComponent, AddCharacterModalComponent, AddPlanetModalComponent],
   templateUrl: './film-detail.component.html',
 })
 export class FilmDetailComponent implements OnInit {
@@ -33,6 +35,9 @@ export class FilmDetailComponent implements OnInit {
   starships = signal<Starship[]>([]);
   vehicles = signal<Vehicle[]>([]);
   error = signal<string | null>(null);
+
+  addCharacterModal = viewChild(AddCharacterModalComponent);
+  addPlanetModal = viewChild(AddPlanetModalComponent);
 
   ngOnInit() {
     if (!this.film()) {
@@ -124,8 +129,13 @@ export class FilmDetailComponent implements OnInit {
     }
   }
 
+  // Opens the appropriate modal when user clicks the add button on resource chips
   onAddClick(resourceType: string) {
-    console.log(`Add ${resourceType} clicked`);
+    if (resourceType === 'character') {
+      this.addCharacterModal()?.open();
+    } else if (resourceType === 'planet') {
+      this.addPlanetModal()?.open();
+    }
   }
 
   private toResourceItems<T extends { name: string; url: string }>(items: T[]): ResourceItem[] {

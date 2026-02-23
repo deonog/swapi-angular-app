@@ -15,13 +15,16 @@
   <div class="mt-6 space-y-4">
     <div>
       <app-resource-chips [title]="'Residents'" [items]="getResidentItems()" [clickable]="true"
-        (itemClick)="onResidentClick($event)" (addClick)="onAddClick('resident')" />
+        [showAddButton]="true" (itemClick)="onResidentClick($event)" (addClick)="onAddClick('resident')" />
     </div>
 
     <div>
       <app-resource-chips [title]="'Films'" [items]="getFilmItems()" [clickable]="true"
-        (itemClick)="onFilmClick($event)" (addClick)="onAddClick('film')" />
+        [showAddButton]="true" (itemClick)="onFilmClick($event)" (addClick)="onAddClick('film')" />
     </div>
   </div>
   }
+
+  <app-add-character-modal (submit)="onAddClick('resident')" />
+  <app-add-film-modal (submit)="onAddClick('film')" />
 </div>

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, viewChild } from '@angular/core';
 import { CommonModule, formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { NavigationStateService } from '../../core/services/navigation-state.service';
@@ -15,11 +15,12 @@ import { ResourceChipsComponent, ResourceItem } from '../../shared/components/re
 import { DetailHeaderComponent } from '../../shared/components/detail-header/detail-header.component';
 import { DetailLayoutComponent } from '../../shared/components/detail-layout/detail-layout.component';
 import { getPeopleFields } from '../../core/utils/people.util';
+import { AddFilmModalComponent } from '../../shared/components/modals/add-film-modal/add-film-modal.component';
 
 @Component({
   selector: 'app-character-detail',
   standalone: true,
-  imports: [CommonModule, ResourceChipsComponent, DetailHeaderComponent, DetailLayoutComponent],
+  imports: [CommonModule, ResourceChipsComponent, DetailHeaderComponent, DetailLayoutComponent, AddFilmModalComponent],
   templateUrl: './character-detail.component.html',
 })
 export class CharacterDetailComponent implements OnInit {
@@ -33,6 +34,8 @@ export class CharacterDetailComponent implements OnInit {
   starships = signal<Starship[]>([]);
   vehicles = signal<Vehicle[]>([]);
   error = signal<string | null>(null);
+
+  addFilmModal = viewChild(AddFilmModalComponent);
 
   ngOnInit() {
     if (!this.character()) {
@@ -102,8 +105,11 @@ export class CharacterDetailComponent implements OnInit {
     }
   }
 
+  // Handles opening modals when add button is clicked on resource chips
   onAddClick(resourceType: string) {
-    console.log(`Add ${resourceType} clicked`);
+    if (resourceType === 'film') {
+      this.addFilmModal()?.open();
+    }
   }
 
   private toResourceItems<T extends { name: string; url: string }>(items: T[]): ResourceItem[] {

@@ -14,19 +14,21 @@
   @if (character()) {
   <div class="mt-6 space-y-4">
     <div>
-      <app-resource-chips [title]="'Films'" [items]="getFilmItems()" [clickable]="true"
+      <app-resource-chips [title]="'Films'" [items]="getFilmItems()" [clickable]="true" [showAddButton]="true"
         (itemClick)="onFilmClick($event)" (addClick)="onAddClick('film')" />
     </div>
 
     <div>
-      <app-resource-chips [title]="'Starships'" [items]="getStarshipItems()" [clickable]="false"
+      <app-resource-chips [title]="'Starships'" [items]="getStarshipItems()" [clickable]="false" [showAddButton]="true"
         (addClick)="onAddClick('starship')" />
     </div>
 
     <div>
-      <app-resource-chips [title]="'Vehicles'" [items]="getVehicleItems()" [clickable]="false"
+      <app-resource-chips [title]="'Vehicles'" [items]="getVehicleItems()" [clickable]="false" [showAddButton]="true"
         (addClick)="onAddClick('vehicle')" />
     </div>
   </div>
   }
+
+  <app-add-film-modal (submit)="onAddClick('film')" />
 </div>
