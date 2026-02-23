@@ -2,33 +2,45 @@
   <nav class="container mx-auto px-4 py-8 flex items-center justify-between">
     <div class="flex items-center gap-12">
       <div class="flex flex-col">
-        <a routerLink="/" routerLinkActive="underline" class="text-black font-medium hover:opacity-80 transition">
+        <a routerLink="/" routerLinkActive="underline"
+          class="text-black font-medium hover:opacity-80 transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:rounded">
           <img src="/assets/images/star-wars-logo.png" alt="Star Wars" class="h-20" />
         </a>
       </div>
 
-      <div class="flex items-center gap-8">
+      <nav class="flex items-center gap-8" aria-label="Main navigation">
         <a routerLink="/" routerLinkActive="underline" [routerLinkActiveOptions]="{ exact: true }"
-          class="text-black font-medium hover:opacity-80 transition">
+          [attr.aria-current]="isActiveRoute('/') ? 'page' : null"
+          class="text-black font-medium hover:opacity-80 transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:rounded"
+          aria-label="Go to home page">
           Star Wars
         </a>
-        <a routerLink="/films" routerLinkActive="underline" class="text-black font-medium hover:opacity-80 transition">
+        <a routerLink="/films" routerLinkActive="underline"
+          [attr.aria-current]="isActiveRoute('/films') ? 'page' : null"
+          class="text-black font-medium hover:opacity-80 transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:rounded"
+          aria-label="Go to films page">
           Films
         </a>
         <a routerLink="/characters" routerLinkActive="underline"
-          class="text-black font-medium hover:opacity-80 transition">
+          [attr.aria-current]="isActiveRoute('/characters') ? 'page' : null"
+          class="text-black font-medium hover:opacity-80 transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:rounded"
+          aria-label="Go to characters page">
           Characters
         </a>
         <a routerLink="/planets" routerLinkActive="underline"
-          class="text-black font-medium hover:opacity-80 transition">
+          [attr.aria-current]="isActiveRoute('/planets') ? 'page' : null"
+          class="text-black font-medium hover:opacity-80 transition focus:outline-none focus:ring-2 focus:ring-blue-500 focus:rounded"
+          aria-label="Go to planets page">
           Planets
         </a>
-      </div>
+      </nav>
     </div>
 
     <div class="flex items-center border border-gray-300 rounded px-3 py-2 w-64">
-      <input type="text" placeholder="Search" class="flex-1 outline-none text-black placeholder-gray-400" />
-      <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <label for="search-input" class="sr-only">Search</label>
+      <input id="search-input" type="text" placeholder="Search" aria-label="Search"
+        class="flex-1 outline-none text-black placeholder-gray-400 focus:ring-2 focus:ring-blue-500" />
+      <svg class="w-5 h-5 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
           d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
       </svg>

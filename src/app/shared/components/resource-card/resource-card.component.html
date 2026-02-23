@@ -21,8 +21,8 @@
       }
     </div>
 
-    <button (click)="onLinkClick()"
-      class="text-black hover:opacity-80 hover:underline font-medium cursor-pointer mt-auto text-left self-start">
+    <button (click)="onLinkClick()" [attr.aria-label]="'View details for ' + title()"
+      class="text-black hover:opacity-80 hover:underline font-medium cursor-pointer mt-auto text-left self-start focus:outline-none focus:ring-2 focus:ring-blue-500 focus:rounded">
       {{ linkText() }}
     </button>
   </div>

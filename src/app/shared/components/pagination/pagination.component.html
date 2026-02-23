@@ -1,10 +1,12 @@
-<div class="flex justify-between items-center mt-8">
+<nav class="flex justify-between items-center mt-8" aria-label="Pagination">
   <button [disabled]="!hasPrevious()" (click)="onPreviousClick()"
-    class="px-4 py-2 bg-blue-600 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed">
+    [attr.aria-label]="!hasPrevious() ? 'Previous page (disabled)' : 'Go to previous page'"
+    class="px-4 py-2 bg-blue-600 text-white disabled:bg-gray-300 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500">
     Previous
   </button>
   <button [disabled]="!hasNext()" (click)="onNextClick()"
-    class="px-4 py-2 bg-blue-600 text-white rounded disabled:bg-gray-300 disabled:cursor-not-allowed">
+    [attr.aria-label]="!hasNext() ? 'Next page (disabled)' : 'Go to next page'"
+    class="px-4 py-2 bg-blue-600 text-white disabled:bg-gray-300 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500">
     Next
   </button>
-</div>
+</nav>

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,5 +9,12 @@ import { RouterModule } from '@angular/router';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent {
-
+  private router = inject(Router);
+  
+  isActiveRoute(path: string): boolean {
+    if (path === '/') {
+      return this.router.url === '/';
+    }
+    return this.router.url.startsWith(path);
+  }
 }
