@@ -5,12 +5,7 @@
   <app-detail-layout [contentFields]="getFilmFields()" [description]="getFilmDescription()" [imageUrl]="null"
     [imageAltText]="'Film Image'" />
 
-  @if (error()) {
-  <div class="mt-6 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
-    <p class="font-semibold">Error</p>
-    <p>{{ error() }}</p>
-  </div>
-  }
+  <app-error-message [error]="error()" containerClass="mt-6" />
 
   @if (film()) {
   <div class="mt-6 space-y-4">

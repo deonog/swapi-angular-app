@@ -14,13 +14,14 @@ import { DetailField } from '../../shared/components/detail-content/detail-conte
 import { ResourceChipsComponent, ResourceItem } from '../../shared/components/resource-chips/resource-chips.component';
 import { DetailHeaderComponent } from '../../shared/components/detail-header/detail-header.component';
 import { DetailLayoutComponent } from '../../shared/components/detail-layout/detail-layout.component';
+import { ErrorMessageComponent } from '../../shared/components/error-message/error-message.component';
 import { getPeopleFields } from '../../core/utils/people.util';
 import { AddFilmModalComponent } from '../../shared/components/modals/add-film-modal/add-film-modal.component';
 
 @Component({
   selector: 'app-character-detail',
   standalone: true,
-  imports: [CommonModule, ResourceChipsComponent, DetailHeaderComponent, DetailLayoutComponent, AddFilmModalComponent],
+  imports: [CommonModule, ResourceChipsComponent, DetailHeaderComponent, DetailLayoutComponent, ErrorMessageComponent, AddFilmModalComponent],
   templateUrl: './character-detail.component.html',
 })
 export class CharacterDetailComponent implements OnInit {

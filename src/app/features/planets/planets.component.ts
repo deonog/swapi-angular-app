@@ -7,12 +7,13 @@ import { Router } from '@angular/router';
 import { ApiResponse } from '../../core/models/api-response.model';
 import { ResourceCardComponent, CardField } from '../../shared/components/resource-card/resource-card.component';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
+import { ErrorMessageComponent } from '../../shared/components/error-message/error-message.component';
 import { getPlanetFields } from '../../core/utils/planet.util';
 
 @Component({
   selector: 'app-planets',
   standalone: true,
-  imports: [CommonModule, ResourceCardComponent, PaginationComponent],
+  imports: [CommonModule, ResourceCardComponent, PaginationComponent, ErrorMessageComponent],
   templateUrl: './planets.component.html',
 })
 export class PlanetsComponent {

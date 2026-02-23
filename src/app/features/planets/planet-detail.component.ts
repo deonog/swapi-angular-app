@@ -12,6 +12,7 @@ import { DetailField } from '../../shared/components/detail-content/detail-conte
 import { ResourceChipsComponent, ResourceItem } from '../../shared/components/resource-chips/resource-chips.component';
 import { DetailHeaderComponent } from '../../shared/components/detail-header/detail-header.component';
 import { DetailLayoutComponent } from '../../shared/components/detail-layout/detail-layout.component';
+import { ErrorMessageComponent } from '../../shared/components/error-message/error-message.component';
 import { getPlanetFields } from '../../core/utils/planet.util';
 import { AddCharacterModalComponent } from '../../shared/components/modals/add-character-modal/add-character-modal.component';
 import { AddFilmModalComponent } from '../../shared/components/modals/add-film-modal/add-film-modal.component';
@@ -19,7 +20,7 @@ import { AddFilmModalComponent } from '../../shared/components/modals/add-film-m
 @Component({
   selector: 'app-planet-detail',
   standalone: true,
-  imports: [CommonModule, ResourceChipsComponent, DetailHeaderComponent, DetailLayoutComponent, AddCharacterModalComponent, AddFilmModalComponent],
+  imports: [CommonModule, ResourceChipsComponent, DetailHeaderComponent, DetailLayoutComponent, ErrorMessageComponent, AddCharacterModalComponent, AddFilmModalComponent],
   templateUrl: './planet-detail.component.html',
 })
 export class PlanetDetailComponent implements OnInit {

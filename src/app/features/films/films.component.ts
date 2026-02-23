@@ -8,12 +8,13 @@ import { Film } from '../../core/models/film.model';
 import { ApiResponse } from '../../core/models/api-response.model';
 import { ResourceCardComponent, CardField } from '../../shared/components/resource-card/resource-card.component';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
+import { ErrorMessageComponent } from '../../shared/components/error-message/error-message.component';
 import { getFilmFields } from '../../core/utils/film.util';
 
 @Component({
   selector: 'app-films',
   standalone: true,
-  imports: [CommonModule, ResourceCardComponent, PaginationComponent],
+  imports: [CommonModule, ResourceCardComponent, PaginationComponent, ErrorMessageComponent],
   templateUrl: './films.component.html',
 })
 export class FilmsComponent {

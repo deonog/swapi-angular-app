@@ -13,6 +13,7 @@ import { ResourceChipsComponent, ResourceItem } from '../../shared/components/re
 import { DetailHeaderComponent } from '../../shared/components/detail-header/detail-header.component';
 import { DetailLayoutComponent } from '../../shared/components/detail-layout/detail-layout.component';
 import { DetailField } from '../../shared/components/detail-content/detail-content.component';
+import { ErrorMessageComponent } from '../../shared/components/error-message/error-message.component';
 import { getFilmFields } from '../../core/utils/film.util';
 import { AddCharacterModalComponent } from '../../shared/components/modals/add-character-modal/add-character-modal.component';
 import { AddPlanetModalComponent } from '../../shared/components/modals/add-planet-modal/add-planet-modal.component';
@@ -20,7 +21,7 @@ import { AddPlanetModalComponent } from '../../shared/components/modals/add-plan
 @Component({
   selector: 'app-film-detail',
   standalone: true,
-  imports: [CommonModule, ResourceChipsComponent, DetailHeaderComponent, DetailLayoutComponent, AddCharacterModalComponent, AddPlanetModalComponent],
+  imports: [CommonModule, ResourceChipsComponent, DetailHeaderComponent, DetailLayoutComponent, ErrorMessageComponent, AddCharacterModalComponent, AddPlanetModalComponent],
   templateUrl: './film-detail.component.html',
 })
 export class FilmDetailComponent implements OnInit {

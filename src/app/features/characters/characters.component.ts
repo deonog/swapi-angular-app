@@ -10,11 +10,12 @@ import { getPeopleFields } from '../../core/utils/people.util';
 import { ApiResponse } from '../../core/models/api-response.model';
 import { Observable } from 'rxjs';
 import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
+import { ErrorMessageComponent } from '../../shared/components/error-message/error-message.component';
 
 @Component({
   selector: 'app-characters',
   standalone: true,
-  imports: [CommonModule, ResourceCardComponent, PaginationComponent],
+  imports: [CommonModule, ResourceCardComponent, PaginationComponent, ErrorMessageComponent],
   templateUrl: './characters.component.html',
 })
 export class CharactersComponent {
