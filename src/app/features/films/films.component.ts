@@ -1,16 +1,19 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { SwapiService } from '../../core/services/swapi.service';
 import { NavigationStateService } from '../../core/services/navigation-state.service';
 import { Film } from '../../core/models/film.model';
 import { ApiResponse } from '../../core/models/api-response.model';
 import { ResourceCardComponent, CardField } from '../../shared/components/resource-card/resource-card.component';
+import { PaginationComponent } from '../../shared/components/pagination/pagination.component';
+import { getFilmFields } from '../../core/utils/film.util';
 
 @Component({
   selector: 'app-films',
   standalone: true,
-  imports: [CommonModule, ResourceCardComponent],
+  imports: [CommonModule, ResourceCardComponent, PaginationComponent],
   templateUrl: './films.component.html',
 })
 export class FilmsComponent {
@@ -29,20 +32,7 @@ export class FilmsComponent {
   }
 
   getFilmFields(film: Film): CardField[] {
-    return [
-      { label: 'Director', value: film.director },
-      { label: 'Produzenten', value: film.producer },
-      { label: 'Erscheinungsdatum', value: this.formatDate(film.release_date) }
-    ];
-  }
-
-  formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('de-DE', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
+    return getFilmFields(film);
   }
 
   ngOnInit() {
@@ -52,13 +42,12 @@ export class FilmsComponent {
   loadFilms(url?: string) {
     this.loading.set(true);
     // Handle both first load and pagination
-    const apiCall = url
+    const apiCall: Observable<ApiResponse<Film>> = url
       ? this.swapiService.getFilmsByUrl(url)
       : this.swapiService.getFilms();
 
     apiCall.subscribe({
       next: (response: ApiResponse<Film>) => {
-        console.log(response);
         this.films.set(response.results);
         // Save the next/prev URLs for pagination buttons
         this.nextPage.set(response.next);

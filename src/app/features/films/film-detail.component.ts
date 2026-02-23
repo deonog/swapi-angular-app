@@ -13,6 +13,7 @@ import { ResourceChipsComponent, ResourceItem } from '../../shared/components/re
 import { DetailHeaderComponent } from '../../shared/components/detail-header/detail-header.component';
 import { DetailLayoutComponent } from '../../shared/components/detail-layout/detail-layout.component';
 import { DetailField } from '../../shared/components/detail-content/detail-content.component';
+import { getFilmFields } from '../../core/utils/film.util';
 
 @Component({
   selector: 'app-film-detail',
@@ -34,7 +35,6 @@ export class FilmDetailComponent implements OnInit {
   loading = signal(false);
 
   ngOnInit() {
-    console.log(this.film());
     if (!this.film()) {
       this.router.navigate(['/films']);
       return;
@@ -49,72 +49,59 @@ export class FilmDetailComponent implements OnInit {
 
     this.loading.set(true);
 
-    const requests: any[] = [];
-
     // SWAPI only gives us URLs, gotta fetch each one separately
-    // forkJoin runs them all at once instead of waiting for each
-    if (filmData.characters.length > 0) {
-      requests.push(
-        forkJoin(
-          filmData.characters.map(url =>
-            this.swapiService.getPersonByUrl(url).pipe(
-              catchError(() => of(null))
-            )
+    // Using forkJoin with object for better type safety
+    const characters$ = filmData.characters.length > 0
+      ? forkJoin(
+        filmData.characters.map(url =>
+          this.swapiService.getPersonByUrl(url).pipe(
+            catchError(() => of(null))
           )
-        ).pipe(map(results => results.filter(r => r !== null) as People[]))
-      );
-    } else {
-      requests.push(of([]));
-    }
+        )
+      ).pipe(map(results => results.filter(r => r !== null) as People[]))
+      : of([]);
 
-    if (filmData.planets.length > 0) {
-      requests.push(
-        forkJoin(
-          filmData.planets.map(url =>
-            this.swapiService.getPlanetByUrl(url).pipe(
-              catchError(() => of(null))
-            )
+    const planets$ = filmData.planets.length > 0
+      ? forkJoin(
+        filmData.planets.map(url =>
+          this.swapiService.getPlanetByUrl(url).pipe(
+            catchError(() => of(null))
           )
-        ).pipe(map(results => results.filter(r => r !== null) as Planet[]))
-      );
-    } else {
-      requests.push(of([]));
-    }
+        )
+      ).pipe(map(results => results.filter(r => r !== null) as Planet[]))
+      : of([]);
 
-    if (filmData.starships.length > 0) {
-      requests.push(
-        forkJoin(
-          filmData.starships.map(url =>
-            this.swapiService.getStarshipByUrl(url).pipe(
-              catchError(() => of(null))
-            )
+    const starships$ = filmData.starships.length > 0
+      ? forkJoin(
+        filmData.starships.map(url =>
+          this.swapiService.getStarshipByUrl(url).pipe(
+            catchError(() => of(null))
           )
-        ).pipe(map(results => results.filter(r => r !== null) as Starship[]))
-      );
-    } else {
-      requests.push(of([]));
-    }
+        )
+      ).pipe(map(results => results.filter(r => r !== null) as Starship[]))
+      : of([]);
 
-    if (filmData.vehicles.length > 0) {
-      requests.push(
-        forkJoin(
-          filmData.vehicles.map(url =>
-            this.swapiService.getVehicleByUrl(url).pipe(
-              catchError(() => of(null))
-            )
+    const vehicles$ = filmData.vehicles.length > 0
+      ? forkJoin(
+        filmData.vehicles.map(url =>
+          this.swapiService.getVehicleByUrl(url).pipe(
+            catchError(() => of(null))
           )
-        ).pipe(map(results => results.filter(r => r !== null) as Vehicle[]))
-      );
-    } else {
-      requests.push(of([]));
-    }
+        )
+      ).pipe(map(results => results.filter(r => r !== null) as Vehicle[]))
+      : of([]);
 
-    forkJoin(requests).subscribe({
-      next: (results: any[]) => {
-        this.characters.set((results[0] || []) as People[]);
-        this.planets.set((results[1] || []) as Planet[]);
-        this.starships.set((results[2] || []) as Starship[]);
-        this.vehicles.set((results[3] || []) as Vehicle[]);
+    forkJoin({
+      characters: characters$,
+      planets: planets$,
+      starships: starships$,
+      vehicles: vehicles$
+    }).subscribe({
+      next: (results) => {
+        this.characters.set(results.characters);
+        this.planets.set(results.planets);
+        this.starships.set(results.starships);
+        this.vehicles.set(results.vehicles);
         this.loading.set(false);
       },
       error: () => {
@@ -123,85 +110,53 @@ export class FilmDetailComponent implements OnInit {
     });
   }
 
-  navigateToCharacter(character: People) {
-    this.navigationState.setCharacter(character);
-    this.router.navigate(['/characters/detail']);
-  }
-
-  navigateToPlanet(planet: Planet) {
-    this.navigationState.setPlanet(planet);
-    this.router.navigate(['/planets/detail']);
-  }
-
   onCharacterClick(item: ResourceItem) {
-    // Need to find the full object since we only get name/url from the chip
     const character = this.characters().find(c => c.url === item.url);
     if (character) {
-      this.navigateToCharacter(character);
+      this.navigationState.setCharacter(character);
+      this.router.navigate(['/characters/detail']);
     }
   }
 
   onPlanetClick(item: ResourceItem) {
     const planet = this.planets().find(p => p.url === item.url);
     if (planet) {
-      this.navigateToPlanet(planet);
+      this.navigationState.setPlanet(planet);
+      this.router.navigate(['/planets/detail']);
     }
   }
 
-  onAddCharacter() {
-    console.log('Add character clicked');
+  onAddClick(resourceType: string) {
+    console.log(`Add ${resourceType} clicked`);
   }
 
-  onAddPlanet() {
-    console.log('Add planet clicked');
-  }
-
-  onAddStarship() {
-    console.log('Add starship clicked');
-  }
-
-  onAddVehicle() {
-    console.log('Add vehicle clicked');
+  private toResourceItems<T extends { name: string; url: string }>(items: T[]): ResourceItem[] {
+    return items.map(item => ({ name: item.name, url: item.url }));
   }
 
   getCharacterItems(): ResourceItem[] {
-    return this.characters().map(c => ({ name: c.name, url: c.url }));
+    return this.toResourceItems(this.characters());
   }
 
   getPlanetItems(): ResourceItem[] {
-    return this.planets().map(p => ({ name: p.name, url: p.url }));
+    return this.toResourceItems(this.planets());
   }
 
   getStarshipItems(): ResourceItem[] {
-    return this.starships().map(s => ({ name: s.name, url: s.url }));
+    return this.toResourceItems(this.starships());
   }
 
   getVehicleItems(): ResourceItem[] {
-    return this.vehicles().map(v => ({ name: v.name, url: v.url }));
+    return this.toResourceItems(this.vehicles());
   }
 
   getFilmFields(): DetailField[] {
     const filmData = this.film();
     if (!filmData) return [];
-
-    return [
-      { label: 'Director', value: filmData.director },
-      { label: 'Producer', value: filmData.producer },
-      { label: 'Release Date', value: this.formatDate(filmData.release_date) }
-    ];
+    return getFilmFields(filmData);
   }
 
   getFilmDescription(): string | null {
     return this.film()?.opening_crawl || null;
-  }
-
-  formatDate(dateString: string): string {
-    // German date format for the UI
-    const date = new Date(dateString);
-    return date.toLocaleDateString('de-DE', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric'
-    });
   }
 }
