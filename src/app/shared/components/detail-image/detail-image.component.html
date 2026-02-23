@@ -1,7 +1,9 @@
-<div class="w-full max-w-md aspect-video bg-gray-200 flex items-center justify-center overflow-hidden">
-  @if (imageUrl()) {
-  <img [src]="imageUrl()!" [alt]="altText()" class="w-full h-full object-cover" />
-  } @else {
-  <span class="text-black">{{ altText() }}</span>
-  }
+<div class="w-full flex justify-end">
+  <div class="max-w-md w-full aspect-video bg-gray-200 flex items-center justify-center overflow-hidden">
+    @if (imageUrl()) {
+    <img [src]="imageUrl()!" [alt]="altText()" class="w-full h-full object-cover" />
+    } @else {
+    <span class="text-black">{{ altText() }}</span>
+    }
+  </div>
 </div>
