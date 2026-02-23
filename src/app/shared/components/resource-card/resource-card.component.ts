@@ -17,7 +17,7 @@ export class ResourceCardComponent {
   fields = input.required<CardField[]>();
 
   imageUrl = input<string | null>(null);
-  linkText = input<string>('Mehr Informationen....');
+  linkText = input<string>('More Information...');
 
   linkClick = output<void>();
 

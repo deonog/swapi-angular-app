@@ -1,4 +1,4 @@
-<div class="container mx-auto py-8 text-black">
+<div class="text-black">
   <app-detail-header [title]="planet()?.name || ''" [subtitle]="''" [pageLabel]="'Film Details'" />
 
   <app-detail-layout [contentFields]="getPlanetFields()" [description]="null" [imageUrl]="null"
@@ -7,12 +7,12 @@
   @if (planet()) {
   <div class="mt-6 space-y-4">
     <div>
-      <app-resource-chips [title]="'Bewohner'" [items]="getResidentItems()" [clickable]="true"
+      <app-resource-chips [title]="'Residents'" [items]="getResidentItems()" [clickable]="true"
         (itemClick)="onResidentClick($event)" (addClick)="onAddClick('resident')" />
     </div>
 
     <div>
-      <app-resource-chips [title]="'Filme'" [items]="getFilmItems()" [clickable]="true"
+      <app-resource-chips [title]="'Films'" [items]="getFilmItems()" [clickable]="true"
         (itemClick)="onFilmClick($event)" (addClick)="onAddClick('film')" />
     </div>
   </div>
