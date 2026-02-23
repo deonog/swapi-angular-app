@@ -17,6 +17,7 @@ export class ResourceChipsComponent {
   items = input.required<ResourceItem[]>();
 
   clickable = input<boolean>(false);
+  showAddButton = input<boolean>(true);
 
   itemClick = output<ResourceItem>();
   addClick = output<void>();

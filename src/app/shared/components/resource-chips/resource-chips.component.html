@@ -13,9 +13,11 @@
     </span>
     }
     }
+    @if (showAddButton()) {
     <button (click)="onAddClick()"
       class="px-4 py-2 bg-gray-100 text-black hover:bg-gray-200 transition-colors cursor-pointer">
       ...
     </button>
+    }
   </div>
 </div>
