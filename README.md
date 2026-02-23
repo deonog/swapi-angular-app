@@ -1,59 +1,64 @@
-# SwapiAngularApp
+# Star Wars API Angular App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.0.
+Angular 21 Anwendung, die Daten von der Star Wars API (SWAPI) anzeigt. Erstellt mit zoneless Architektur unter Verwendung von Signals und Standalone Components.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Listenansichten für Filme, Charaktere und Planeten mit Pagination
+- Detailseiten mit vollständigen Informationen und verwandten Ressourcen
+- Modal-Formulare zum Hinzufügen neuer Einträge (clientseitige Simulation)
+- Responsive Design mit Tailwind CSS
+- Fehlerbehandlung für API-Fehler
+- WCAG-optimiert für Barrierefreiheit (Focus-Management, ARIA-Attribute, Skip-Links, Screenreader-Unterstützung)
 
+## Tech Stack
+
+- Angular 21 (zoneless mit Signals)
+- TypeScript
+- Tailwind CSS
+- Jest für Unit-Tests
+- RxJS für Datenverarbeitung
+
+## Installation
+
+Abhängigkeiten installieren:
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+Entwicklungsserver starten:
 ```bash
-ng generate component component-name
+npm start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Öffne `http://localhost:4200` im Browser.
+
+## Tests ausführen
+
+Unit-Tests wurden mit Jest implementiert für:
+- `app.component` - App-Initialisierung und Header-Rendering
+- `swapi.service` - API-Aufrufe und Fehlerbehandlung
 
 ```bash
-ng generate --help
+npm test
 ```
 
-## Building
-
-To build the project run:
-
+Für Coverage:
 ```bash
-ng build
+npm run test:coverage
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## API
 
-## Running unit tests
+Diese App nutzt die [Star Wars API](https://swapi.dev/), die eine schreibgeschützte API ist. Die Modal-Formulare zum Hinzufügen von Einträgen sind nur clientseitig und erstellen keine neuen Ressourcen.
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Projektstruktur
 
-```bash
-ng test
-```
+Die Anwendung folgt einer **feature-driven Architektur**:
 
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- `src/app/core/` - Zentrale Services, Models und Utilities
+- `src/app/features/` - Feature-Module (Filme, Charaktere, Planeten, Home)
+  - Jedes Feature enthält seine List- und Detail-Komponenten
+  - Verwendet wiederverwendbare Komponenten aus `shared/`
+- `src/app/shared/` - Wiederverwendbare Komponenten (Cards, Modals, Pagination, Detail-Layout)
+- `src/app/layout/` - Layout-Komponenten (Header, Footer)
