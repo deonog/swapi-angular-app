@@ -62,3 +62,30 @@ Die Anwendung folgt einer **feature-driven Architektur**:
   - Verwendet wiederverwendbare Komponenten aus `shared/`
 - `src/app/shared/` - Wiederverwendbare Komponenten (Cards, Modals, Pagination, Detail-Layout)
 - `src/app/layout/` - Layout-Komponenten (Header, Footer)
+
+## Technische Entscheidungen
+
+**Zoneless Architektur mit Signals:**
+- Verwendung von Angular Signals für reaktive State-Verwaltung
+- Keine Zone.js-Abhängigkeit für bessere Performance
+- Standalone Components für bessere Tree-Shaking und Modularität
+
+**State Management:**
+- `NavigationStateService` mit Signals für Datenübergabe zwischen List- und Detail-Seiten
+- SWAPI liefert keine einfachen IDs, daher Übergabe des gesamten Objekts via Signals
+- Alternative zu URL-Parametern für komplexe Objekte
+
+**Service-Architektur:**
+- Zentraler `SwapiService` für alle API-Aufrufe (statt separate Services pro Feature)
+- Einfachere Wartung und konsistente Fehlerbehandlung
+- Wiederverwendbare Methoden für verschiedene Ressourcen
+
+**UI-Komponenten:**
+- HTML `<dialog>` Element für Modals (statt Angular Material)
+- Native Browser-APIs für bessere Performance und weniger Dependencies
+- Tailwind CSS für Utility-First Styling (statt Component-Library)
+
+**Testing:**
+- Jest statt Karma/Jasmine für moderneres Testing-Setup
+- Unit-Tests fokussiert auf Services und Core-Komponenten
+- HttpTestingController für isolierte API-Tests
