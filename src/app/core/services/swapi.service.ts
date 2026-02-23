@@ -15,6 +15,7 @@ export class SwapiService {
   private apiUrl = 'https://swapi.dev/api';
   private http = inject(HttpClient);
 
+  // ===== Films =====
   getFilms() {
     return this.http.get<ApiResponse<Film>>(`${this.apiUrl}/films`).pipe(catchError(this.handleError));
   }
@@ -23,6 +24,11 @@ export class SwapiService {
     return this.http.get<ApiResponse<Film>>(url).pipe(catchError(this.handleError));
   }
 
+  getFilmByUrl(url: string): Observable<Film> {
+    return this.http.get<Film>(url).pipe(catchError(this.handleError));
+  }
+
+  // ===== People =====
   getPeople() {
     return this.http.get<ApiResponse<People>>(`${this.apiUrl}/people`).pipe(catchError(this.handleError));
   }
@@ -31,6 +37,11 @@ export class SwapiService {
     return this.http.get<ApiResponse<People>>(url).pipe(catchError(this.handleError));
   }
 
+  getPersonByUrl(url: string): Observable<People> {
+    return this.http.get<People>(url).pipe(catchError(this.handleError));
+  }
+
+  // ===== Planets =====
   getPlanets() {
     return this.http.get<ApiResponse<Planet>>(`${this.apiUrl}/planets`).pipe(catchError(this.handleError));
   }
@@ -39,14 +50,11 @@ export class SwapiService {
     return this.http.get<ApiResponse<Planet>>(url).pipe(catchError(this.handleError));
   }
 
-  getPersonByUrl(url: string): Observable<People> {
-    return this.http.get<People>(url).pipe(catchError(this.handleError));
-  }
-
   getPlanetByUrl(url: string): Observable<Planet> {
     return this.http.get<Planet>(url).pipe(catchError(this.handleError));
   }
 
+  // ===== Starships & Vehicles =====
   getStarshipByUrl(url: string): Observable<Starship> {
     return this.http.get<Starship>(url).pipe(catchError(this.handleError));
   }
