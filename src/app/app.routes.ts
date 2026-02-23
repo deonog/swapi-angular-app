@@ -8,4 +8,5 @@ export const routes: Routes = [
   { path: 'characters/detail', loadComponent: () => import('./features/characters/character-detail.component').then(m => m.CharacterDetailComponent) },
   { path: 'planets', loadComponent: () => import('./features/planets/planets.component').then(m => m.PlanetsComponent) },
   { path: 'planets/detail', loadComponent: () => import('./features/planets/planet-detail.component').then(m => m.PlanetDetailComponent) },
+  { path: '**', redirectTo: '', pathMatch: 'full' }
 ];
