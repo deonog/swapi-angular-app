@@ -1,48 +1,53 @@
-<dialog #dialog class="rounded-lg p-6 max-w-md w-full">
+<dialog #dialog class="p-6 w-[40vw]" aria-labelledby="modal-title-planet">
   <div class="flex flex-col gap-4">
-    <h2 class="text-2xl font-bold text-black text-center">Add Planet</h2>
-    
+    <h2 id="modal-title-planet" class="text-2xl font-bold text-black text-center">Add Planet</h2>
+
     <form [formGroup]="planetForm" class="flex flex-col gap-4">
       <div class="flex flex-col gap-2">
         <label class="text-black font-medium">Name</label>
-        <input type="text" formControlName="name" placeholder="Name" class="border border-gray-300 rounded px-3 py-2 text-black" />
+        <input #firstInput type="text" formControlName="name" placeholder="Name"
+          class="border border-gray-300 px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500" />
       </div>
-      
+
       <div class="flex flex-col gap-2">
         <label class="text-black font-medium">Type</label>
-        <select formControlName="type" class="border border-gray-300 rounded px-3 py-2 text-black">
+        <select formControlName="type"
+          class="border border-gray-300 px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
           <option value="">Select type</option>
           <option value="terrestrial">Terrestrial</option>
           <option value="gas-giant">Gas Giant</option>
           <option value="ice-planet">Ice Planet</option>
         </select>
       </div>
-      
+
       <div class="flex flex-col gap-2">
         <label class="text-black font-medium">Created By</label>
-        <select formControlName="createdBy" class="border border-gray-300 rounded px-3 py-2 text-black">
+        <select formControlName="createdBy"
+          class="border border-gray-300 px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500">
           <option value="">Select creator</option>
           <option value="george-lucas">George Lucas</option>
         </select>
       </div>
-      
+
       <div class="flex flex-col gap-2">
         <label class="text-black font-medium">Genre</label>
-        <input type="text" formControlName="genre" placeholder="Genre" class="border border-gray-300 rounded px-3 py-2 text-black" />
+        <input type="text" formControlName="genre" placeholder="Genre"
+          class="border border-gray-300 px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500" />
       </div>
-      
+
       <div class="flex flex-col gap-2">
         <label class="text-black font-medium">Race(s)</label>
-        <textarea formControlName="races" rows="4" placeholder="Race(s)" class="border border-gray-300 rounded px-3 py-2 text-black"></textarea>
+        <textarea formControlName="races" rows="4" placeholder="Race(s)"
+          class="border border-gray-300 px-3 py-2 text-black focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
       </div>
-      
+
       <div class="flex gap-2 justify-end mt-4">
-        <button type="button" (click)="onCancel()" 
-          class="px-4 py-2 bg-gray-200 text-black hover:bg-gray-300">
+        <button type="button" (click)="onCancel()"
+          class="px-4 py-2 bg-gray-200 text-black hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
           Cancel
         </button>
-        <button type="button" (click)="onCancel()" 
-          class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700">
+        <button type="button" (click)="onCancel()"
+          class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
           Add Planet
         </button>
       </div>
