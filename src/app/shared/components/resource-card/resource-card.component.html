@@ -1,0 +1,29 @@
+<div class="bg-white shadow-md overflow-hidden h-full flex flex-col">
+  @if (imageUrl()) {
+  <div class="w-full h-64 bg-gray-200 overflow-hidden flex-shrink-0">
+    <img [src]="imageUrl()!" [alt]="title()" class="w-full h-full object-cover" />
+  </div>
+  } @else {
+  <div class="w-full h-64 bg-gray-200 flex items-center justify-center flex-shrink-0">
+    <span class="text-gray-400 text-sm">No Image</span>
+  </div>
+  }
+
+  <div class="p-4 flex flex-col flex-grow">
+    <h3 class="text-lg font-bold mb-4 text-gray-900">{{ title() }}</h3>
+
+    <div class="space-y-2 mb-4 flex-grow">
+      @for (field of fields(); track field.label) {
+      <div>
+        <span class="font-medium text-gray-700">{{ field.label }}:</span>
+        <span class="ml-2 text-gray-600">{{ field.value }}</span>
+      </div>
+      }
+    </div>
+
+    <button (click)="onLinkClick()"
+      class="text-blue-600 hover:text-blue-800 hover:underline font-medium cursor-pointer mt-auto text-left self-start">
+      {{ linkText() }}
+    </button>
+  </div>
+</div>

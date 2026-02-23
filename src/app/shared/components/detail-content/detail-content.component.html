@@ -1,0 +1,14 @@
+<div>
+  <h2 class="text-xl font-semibold mb-4 text-black">Details:</h2>
+  <div>
+    @for (field of fields(); track field.label) {
+      <div>
+        <span class="font-medium text-black">{{ field.label }}:</span>
+        <span class="ml-2 text-black">{{ field.value }}</span>
+      </div>
+    }
+  </div>
+  @if (description()) {
+    <p class="text-black whitespace-pre-line mt-4">{{ description() }}</p>
+  }
+</div>

@@ -1,0 +1,9 @@
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 h-full">
+  <div class="flex flex-col h-full">
+    <app-detail-content [fields]="contentFields()" [description]="description()" />
+  </div>
+
+  <div class="flex items-start justify-center md:justify-end">
+    <app-detail-image [imageUrl]="imageUrl()" [altText]="imageAltText()" />
+  </div>
+</div>
