@@ -1,0 +1,31 @@
+<div class="container mx-auto py-8 text-black">
+  <app-detail-header [title]="film()?.title || ''" [subtitle]="'Episode ' + (film()?.episode_id || '')"
+    [pageLabel]="'Film Details'" />
+
+  <app-detail-layout [contentFields]="getFilmFields()" [description]="getFilmDescription()" [imageUrl]="null"
+    [imageAltText]="'Film Image'" />
+
+  @if (film()) {
+  <div class="mt-6 space-y-4">
+    <div>
+      <app-resource-chips [title]="'Characters'" [items]="getCharacterItems()" [clickable]="true"
+        (itemClick)="onCharacterClick($event)" (addClick)="onAddCharacter()" />
+    </div>
+
+    <div>
+      <app-resource-chips [title]="'Planets'" [items]="getPlanetItems()" [clickable]="true"
+        (itemClick)="onPlanetClick($event)" (addClick)="onAddPlanet()" />
+    </div>
+
+    <div>
+      <app-resource-chips [title]="'Starships'" [items]="getStarshipItems()" [clickable]="false"
+        (addClick)="onAddStarship()" />
+    </div>
+
+    <div>
+      <app-resource-chips [title]="'Vehicles'" [items]="getVehicleItems()" [clickable]="false"
+        (addClick)="onAddVehicle()" />
+    </div>
+  </div>
+  }
+</div>
