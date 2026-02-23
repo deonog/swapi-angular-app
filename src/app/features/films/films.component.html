@@ -1,13 +1,13 @@
-<div class="container mx-auto px-4 py-8">
-  <h1 class="text-2xl font-bold text-center mb-8">Films</h1>
+<div>
+  <h1 class="text-6xl font-bold text-center mb-12">Films</h1>
 
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     @for (film of films(); track film.url) {
-    <app-resource-card [title]="film.title" [fields]="getFilmFields(film)" [linkText]="'Mehr Informationen....'"
+    <app-resource-card [title]="film.title" [fields]="getFilmFields(film)" [linkText]="'More Information...'"
       (linkClick)="navigateToDetail(film)" />
     }
   </div>
 
-  <app-pagination [hasPrevious]="!!previousPage()" [hasNext]="!!nextPage()"
-    (previousClick)="loadPreviousPage()" (nextClick)="loadNextPage()" />
+  <app-pagination [hasPrevious]="!!previousPage()" [hasNext]="!!nextPage()" (previousClick)="loadPreviousPage()"
+    (nextClick)="loadNextPage()" />
 </div>
